@@ -45,7 +45,7 @@ nano ./conf/nginx.conf
 ```
 B. Within this file, locate the placeholder <your-server-name-here>. Replace it with either your server's IP address or its DNS name. This alteration will enable Nginx to effectively execute the proxy function."
 
-4.Starting the Nginx Server
+5. Starting the Nginx Server
 
 You can initiate the Nginx server by executing the following command:
 ```
@@ -56,7 +56,7 @@ To monitor the logs of the Nginx container, utilize the following command:
 sudo docker-compose logs -f
 ```
 
-5. Setting Up Nginx as a Reverse Proxy for Another Application.
+6. Setting Up Nginx as a Reverse Proxy for Another Application.
 
 To configure Nginx as a reverse proxy for an additional application, follow these steps:
 
@@ -68,3 +68,40 @@ B. Start the 'demo-app2' by running the following command:
 ```
 sudo docker-compose up -d
 ```
+C. To confirm whether the application is operational, execute the following command:
+```
+curl http://<your-ip-address>:49161
+```
+
+7. Creating Configuration File for the Application
+
+To establish a configuration file for this application, proceed with the following steps:
+
+A. Generate the configuration file using the Nano text editor:
+```
+nano sites/demo-app2.conf
+```
+B. nside this file, input the following details while replacing <your-server-name-here> with your IP address or DNS name:
+
+```
+server {
+    server_name <your-server-name-here>;
+
+    location / {
+        proxy_pass http://demo2:8080;
+    }
+}
+
+```
+By adhering to these instructions, you will successfully create and customize the configuration file for your application.
+
+8. Restarting Nginx Container for Integration with demo-app2
+
+Restart the Nginx container by executing the following command:
+```
+sudo docker-compose up -d --force-recreate
+```
+
+9. Using this approach, you can effortlessly incorporate multiple websites and containers within the same Nginx setup. This streamlined setup will effectively manage all incoming requests for various websites and applications.
+
+10. Lastly, you have the option to include configuration files in the 'sites' directory. Additionally, you can generate certificates using the 'certbot' command to enhance the security of your setup.
