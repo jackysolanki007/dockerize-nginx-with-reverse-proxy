@@ -34,7 +34,9 @@ sudo docker-compose up -d
 curl http://<your-ip-address>:49160
 ```
 If you see hello world then demo app working perfectly.
+
 4. Starting Nginx and Configuring Server Proxy.
+
 To proceed, we'll initiate the Nginx service. Prior to that, it's necessary to make adjustments to the configuration file. Follow these steps:
 
 A. Open the configuration file using the Nano text editor:
@@ -42,3 +44,27 @@ A. Open the configuration file using the Nano text editor:
 nano ./conf/nginx.conf
 ```
 B. Within this file, locate the placeholder <your-server-name-here>. Replace it with either your server's IP address or its DNS name. This alteration will enable Nginx to effectively execute the proxy function."
+
+4.Starting the Nginx Server
+
+You can initiate the Nginx server by executing the following command:
+```
+sudo docker-compose up -d
+```
+To monitor the logs of the Nginx container, utilize the following command:
+```
+sudo docker-compose logs -f
+```
+
+5. Setting Up Nginx as a Reverse Proxy for Another Application.
+
+To configure Nginx as a reverse proxy for an additional application, follow these steps:
+
+A. Navigate to the 'demo-app2' directory using the command:
+```
+cd ./demo-app2 
+```
+B. Start the 'demo-app2' by running the following command:
+```
+sudo docker-compose up -d
+```
