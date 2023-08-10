@@ -1,0 +1,21 @@
+version: '3.7'
+
+services:
+  demo:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: demo:latest
+    container_name:  demo
+    restart: always
+    ports:
+      - 49160:8080
+    networks:
+      - nginx-docker-network
+
+
+networks:
+  nginx-docker-network:
+    driver: bridge
+    name: nginx-docker-network
+    external: true
